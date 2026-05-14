@@ -1,0 +1,59 @@
+package pageObject;
+
+import common.CommonFunctions;
+import common.Hooks;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class PropertyAlertPage {
+    WebDriver driver;
+    CommonFunctions commonFunctions = new CommonFunctions(Hooks.driver);
+
+    int intTIMEOUT = Integer.parseInt(System.getProperty("objectTimeout").trim());
+    By lblHeaderListDetail = By.xpath("//thead/tr/th");
+    By lblValueListDetail = By.xpath("//tbody/tr/td");
+
+
+    public PropertyAlertPage (WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public List<Map<String, String>> funcGetAllDataOfGridView() throws Exception {
+        try {
+            CommonFunctions.funcWaitUntilElementVisibility(driver, lblHeaderListDetail, intTIMEOUT);
+            CommonFunctions.funcWaitUntilElementVisibility(driver, lblValueListDetail, intTIMEOUT);
+
+            List<Map<String, String>> data = new ArrayList<>();
+            List<String> headerList = new ArrayList<>();
+
+            driver.findElements(lblHeaderListDetail).forEach(it -> {
+                headerList.add(it.getText());
+            });
+
+            while (true) {
+                List<String> valueList = new ArrayList<>();
+                driver.findElements(lblValueListDetail).forEach(it -> {
+                    valueList.add(it.getText());
+                });
+
+                for (int i = 0; i < valueList.size() / headerList.size(); i++) {
+                    Map<String, String> record = new HashMap<>();
+                    for (String key : headerList) {
+                        int index = headerList.indexOf(key);
+                        if (i > 0) index = index + i * headerList.size();
+                        record.put(key, valueList.get(index));
+                    }
+                    data.add(record);
+                }
+                return data;
+            }
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+}
