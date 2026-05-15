@@ -3,7 +3,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = "src/test/resources/feature/SignIn.feature",
+        features = "src/test/resources/feature",
         glue = {"stepsDefinition", "common"},
         //tags = "@SmokeTest",
         plugin = {

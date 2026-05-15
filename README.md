@@ -16,6 +16,7 @@ This project is an automation testing framework for EstateFinder website.
 - `src/test/java/stepsDefinition`	-> Cucumber step implementations mapped with feature files
 - `src/test/resources`	 	    -> feature files
 - `src/main/resources`-> properties files
+- `target/cucumber-report.htm` - > test report 
 
 ## How to Run
 1. Clone project
