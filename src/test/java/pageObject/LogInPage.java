@@ -3,7 +3,16 @@ package pageObject;
 import common.CommonFunctions;
 import common.Hooks;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.time.Duration;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class LogInPage {
     WebDriver driver;
@@ -14,6 +23,7 @@ public class LogInPage {
     By txtEmail = By.id("user_email");
     By txtPassword = By.id("user_password");
     By btnSignIn = By.name("commit");
+    By textMyAccountEmail = By.xpath("//nav//*[@data-test = 'current-user-email']");
 
     public LogInPage(WebDriver driver){
         this.driver = driver;
@@ -30,5 +40,33 @@ public class LogInPage {
 
         commonFunctions.funcClickCheckBox(chkRememberMe);
         CommonFunctions.funcClickElement(driver, driver.findElement(btnSignIn), intTIMEOUT);
+    }
+
+    public void verifyEmailMissingAtError() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
+
+        // Tìm input email
+        WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.cssSelector("input[type='email'], input[placeholder*='Email'], input[name*='email']")
+        ));
+
+        // Lấy validation message trực tiếp từ browser
+        String validationMessage = (String) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].validationMessage;", emailInput);
+
+        System.out.println("Validation Message: " + validationMessage);
+
+        assertTrue("Không đúng lỗi missing @",
+                validationMessage.contains("Please include an '@'") ||
+                        validationMessage.contains("missing an '@'"));
+    }
+
+    public void funcVerifyMyAccount(String strEmailExpected) {
+        if (strEmailExpected.equals("default"))
+            strEmailExpected = System.getProperty(System.getProperty("ENV") + ".username");
+
+        String strEmailActual = driver.findElement(textMyAccountEmail).getText();
+
+        Assert.assertEquals(strEmailActual, strEmailExpected);
     }
 }
