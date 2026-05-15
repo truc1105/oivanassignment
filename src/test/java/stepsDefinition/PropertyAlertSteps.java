@@ -35,9 +35,9 @@ public class PropertyAlertSteps {
         }
     }
 
-    @When("I select the data to delete")
+    @When("I select a property alert to edit or delete")
     public void iSelectDataToDelete() {
-        String message = "I select the data to delete";
+        String message = "I select a property alert to edit or delete";
         try {
             propertyAlertPage.funcSelectData();
             System.out.println(message + " ==> PASSED");
@@ -47,11 +47,23 @@ public class PropertyAlertSteps {
         }
     }
 
-    @When("I delete a property alert")
-    public void iDeletePropertyAlert() {
+    @When("I choose to {string} a property alert")
+    public void iDeletePropertyAlert(String strAction) {
         String message = "I delete a property alert";
         try {
-            propertyAlertPage.funcDeletePropertyAlert();
+            propertyAlertPage.funcEditDeletePropertyAlert(strAction);
+            System.out.println(message + " ==> PASSED");
+
+        } catch (AssertionError | Exception e) {
+            System.out.println(message + " ==> FAILED");
+        }
+    }
+
+    @When("I confirm the delete alert")
+    public void iConfirmTheAlert() {
+        String message = "I confirm the delete alert";
+        try {
+            propertyAlertPage.funcConfirmDeleteAlert();
             System.out.println(message + " ==> PASSED");
 
         } catch (AssertionError | Exception e) {

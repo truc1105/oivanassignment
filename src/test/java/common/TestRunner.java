@@ -5,6 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/feature/PropertyAlert.feature",
         glue = {"stepsDefinition", "common"},
+        //tags = "@SmokeTest",
         plugin = {
                 "pretty",
                 "html:target/cucumber-report.html"

@@ -93,7 +93,6 @@ public class PropertyAlertPage {
             Map<String, String> expectedRecord = gridViewData.stream().toList().get(i);
 
             System.setProperty("Alert name" + Thread.currentThread().getName(), expectedRecord.get("Name"));
-
             System.out.println("The selected data to be deleted: " + expectedRecord.get("Name"));
 
         }
@@ -112,8 +111,6 @@ public class PropertyAlertPage {
             // Click OK
             alert.accept();
 
-            System.out.println("✅ Đã click OK trên Delete alert popup");
-
         } catch (TimeoutException e) {
             System.out.println("Không tìm thấy alert trong thời gian chờ");
             throw e;
@@ -123,12 +120,11 @@ public class PropertyAlertPage {
         }
     }
 
-    public void funcDeletePropertyAlert() throws Exception {
+    public void funcEditDeletePropertyAlert(String strAction) throws Exception {
 
         String strItemDeleted = System.getProperty("Alert name" + Thread.currentThread().getName());
-        By elePropertyAlertDeleted = By.xpath("//*[text()='" + strItemDeleted + "']/following-sibling::td[@class='text-end']//form/button[text()='Delete']");
+        By elePropertyAlertDeleted = By.xpath("//*[text()='" + strItemDeleted + "']/following-sibling::td[@class='text-end']//*[text()='" + strAction + "']");
 
         CommonFunctions.funcClickElement(driver, driver.findElement(elePropertyAlertDeleted), intTIMEOUT);
-        funcConfirmDeleteAlert();
     }
 }
