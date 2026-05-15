@@ -42,23 +42,20 @@ public class LogInPage {
         CommonFunctions.funcClickElement(driver, driver.findElement(btnSignIn), intTIMEOUT);
     }
 
-    public void verifyEmailMissingAtError() {
+    public void funcVerifyEmailMissingAtError() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
 
-        // Tìm input email
+        // Find input email
         WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.cssSelector("input[type='email'], input[placeholder*='Email'], input[name*='email']")
         ));
 
-        // Lấy validation message trực tiếp từ browser
+        // get validation message directly from browser
         String validationMessage = (String) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].validationMessage;", emailInput);
 
-        System.out.println("Validation Message: " + validationMessage);
-
-        assertTrue("Không đúng lỗi missing @",
-                validationMessage.contains("Please include an '@'") ||
-                        validationMessage.contains("missing an '@'"));
+        assertTrue("Email is missing the @",
+                validationMessage.contains("Please include an '@'") || validationMessage.contains("missing an '@'"));
     }
 
     public void funcVerifyMyAccount(String strEmailExpected) {

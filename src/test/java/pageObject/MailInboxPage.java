@@ -25,18 +25,15 @@ public class MailInboxPage {
         By objLetterOpener = By.xpath("//div[@class='col left']//dt[text()='To:']/following-sibling::dd[contains(text(),'" + strText + "')]");
         driver.findElement(objLetterOpener).click();
 
-//        Hooks.driver.switchTo().frame(Hooks.driver.findElement(By.tagName("iframe")));
-//
-//        commonFunctions.funcCheckTextIsDisplay("Welcome " + strText + "!");
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("mail"));   // ← Dùng name="mail"
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
-        // Kiểm tra text bên trong iframe
+
+        // Verify text in iframe
         commonFunctions.funcCheckTextIsDisplay("Welcome " + strText + "!");
         commonFunctions.funcClickOnElementByText("Confirm my account");
 
-        // Quay về trang chính (RẤT QUAN TRỌNG)
+        // return to parent frame
         driver.switchTo().defaultContent();
         }
 }

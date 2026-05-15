@@ -22,8 +22,9 @@ public class SignInSteps {
 
             System.out.println("I login with user " + strUsername + " and password " + strPassword + " successfully ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -35,8 +36,9 @@ public class SignInSteps {
 
             System.out.println("I login employee with user " + strUsername + " and password " + strPassword + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -44,12 +46,13 @@ public class SignInSteps {
     public void iVerifyEmailValidationMessage() {
         String message = "I verify email validation message";
         try {
-            logInPage.verifyEmailMissingAtError();
+            logInPage.funcVerifyEmailMissingAtError();
 
             System.out.println("I login employee with user");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -61,8 +64,9 @@ public class SignInSteps {
 
             System.out.println("I login employee with user");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 }

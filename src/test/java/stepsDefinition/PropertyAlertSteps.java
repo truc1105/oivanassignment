@@ -18,8 +18,9 @@ public class PropertyAlertSteps {
 
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -30,8 +31,9 @@ public class PropertyAlertSteps {
             propertyAlertPage.funcVerifyMyNewPropertyAlert();
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -42,8 +44,9 @@ public class PropertyAlertSteps {
             propertyAlertPage.funcSelectData();
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 

@@ -20,8 +20,9 @@ public class MailInboxSteps {
 
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -32,8 +33,9 @@ public class MailInboxSteps {
             mailInboxPage.funcFindMyAccount(strText);
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 }

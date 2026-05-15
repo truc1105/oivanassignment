@@ -25,7 +25,6 @@ public class CommonFunctions {
     WebDriver driver;
     Faker faker = new Faker();
     int intTIMEOUT = Integer.parseInt(System.getProperty("objectTimeout").trim());
-    By btnSignUp = By.xpath("//div[@class='p-tabview-nav-container']//button[@aria-label='Next Page']");
     By alertMessages= By.xpath("//*[contains(@class,'alert alert')]");
 
     public CommonFunctions(WebDriver driver) {
@@ -53,10 +52,7 @@ public class CommonFunctions {
         }
     }
 
-//    public void funcClickOnElementByText(String strText) throws InterruptedException {
-//        funcClickOnElementByText(strText, 0);
-//    }
-//
+
     public void funcClickOnElementByText(String strText) throws InterruptedException {
         By ele = By.xpath("//*[text() = '" + strText + "']");
         try
@@ -67,8 +63,7 @@ public class CommonFunctions {
         {
             try {
                 System.out.println("Webpage on loading...");
-                //CommonFunctions.waitForPageLoadCompleted(driver);
-
+                Thread.sleep(1000);
                 CommonFunctions.funcClickElement(driver, driver.findElement(ele), intTIMEOUT);
             }
             catch (Exception ex)
@@ -115,8 +110,7 @@ public class CommonFunctions {
         {
             try {
                 System.out.println("Webpage on loading...");
-                //CommonFunctions.waitForPageLoadCompleted(driver);
-
+                Thread.sleep(1000);
                 CommonFunctions.funcClickElement(driver, driver.findElements(ele).get(index), intTIMEOUT);
             }
             catch (Exception ex)

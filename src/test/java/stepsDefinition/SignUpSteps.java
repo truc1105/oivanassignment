@@ -16,8 +16,9 @@ public class SignUpSteps {
             Hooks.driver.get(System.getProperty(System.getProperty("ENV") + ".baseUrl"));
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -28,8 +29,9 @@ public class SignUpSteps {
             commonFunctions.funcVerifyThePageTitle(Hooks.driver, strTitlePage);
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -40,10 +42,9 @@ public class SignUpSteps {
             commonFunctions.funcClickOnElementByText(text);
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
-
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
-
+            e.printStackTrace();
         }
     }
 
@@ -54,8 +55,9 @@ public class SignUpSteps {
             commonFunctions.inputFieldWithLabel(label, text, index);
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
+            e.printStackTrace();
         }
     }
 
@@ -66,10 +68,9 @@ public class SignUpSteps {
             commonFunctions.funcClickOnElementByValue(text, 0);
             System.out.println(message + " ==> PASSED");
 
-        } catch (AssertionError | Exception e) {
-
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
-
+            e.printStackTrace();
         }
     }
 
@@ -80,10 +81,9 @@ public class SignUpSteps {
             commonFunctions.checkAlertMessageIsDisplay(alertMessage);
             System.out.println(message + " ==> PASSED" );
 
-        } catch (AssertionError | Exception e) {
-
+        } catch (Exception e) {
             System.out.println(message + " ==> FAILED");
-
+            e.printStackTrace();
         }
     }
 }

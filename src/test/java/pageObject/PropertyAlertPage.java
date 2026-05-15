@@ -102,7 +102,7 @@ public class PropertyAlertPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            // Chờ alert xuất hiện
+            // wait for alert show up
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 
             String alertText = alert.getText();
@@ -111,20 +111,15 @@ public class PropertyAlertPage {
             // Click OK
             alert.accept();
 
-        } catch (TimeoutException e) {
-            System.out.println("Không tìm thấy alert trong thời gian chờ");
-            throw e;
         } catch (Exception e) {
-            System.out.println("Lỗi khi xử lý alert: " + e.getMessage());
+            System.out.println("Alert not found " + e.getMessage());
             throw e;
         }
     }
 
     public void funcEditDeletePropertyAlert(String strAction) throws Exception {
-
         String strItemDeleted = System.getProperty("Alert name" + Thread.currentThread().getName());
         By elePropertyAlertDeleted = By.xpath("//*[text()='" + strItemDeleted + "']/following-sibling::td[@class='text-end']//*[text()='" + strAction + "']");
-
         CommonFunctions.funcClickElement(driver, driver.findElement(elePropertyAlertDeleted), intTIMEOUT);
     }
 }
