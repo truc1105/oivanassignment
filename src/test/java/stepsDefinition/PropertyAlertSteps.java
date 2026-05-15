@@ -34,4 +34,28 @@ public class PropertyAlertSteps {
             System.out.println(message + " ==> FAILED");
         }
     }
+
+    @When("I select the data to delete")
+    public void iSelectDataToDelete() {
+        String message = "I select the data to delete";
+        try {
+            propertyAlertPage.funcSelectData();
+            System.out.println(message + " ==> PASSED");
+
+        } catch (AssertionError | Exception e) {
+            System.out.println(message + " ==> FAILED");
+        }
+    }
+
+    @When("I delete a property alert")
+    public void iDeletePropertyAlert() {
+        String message = "I delete a property alert";
+        try {
+            propertyAlertPage.funcDeletePropertyAlert();
+            System.out.println(message + " ==> PASSED");
+
+        } catch (AssertionError | Exception e) {
+            System.out.println(message + " ==> FAILED");
+        }
+    }
 }

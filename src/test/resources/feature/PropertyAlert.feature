@@ -5,6 +5,7 @@ Feature: Property alert
     When I click on the item with text "Sign in"
     Then I verify title page is "Sign in"
     When I login successfully with the default account
+    Then I verify an alert appears with the message "Signed in successfully."
     Then I verify title page is "Listings"
     When I click on the item with text "Create alert"
     Then I verify title page is "New alert"
@@ -17,3 +18,16 @@ Feature: Property alert
     When I click on the button "Create Alert"
     Then I verify title page is "My Alerts"
     Then I verify my new property alert is showing correctly
+
+  Scenario: Delete property alert
+    Given I open home page
+    When I click on the item with text "Sign in"
+    Then I verify title page is "Sign in"
+    When I login successfully with the default account
+    Then I verify an alert appears with the message "Signed in successfully."
+    Then I verify title page is "Listings"
+    When I click on the item with text "My Alerts"
+    Then I verify title page is "My Alerts"
+    When I select the data to delete
+    When I delete a property alert
+    Then I verify an alert appears with the message "Alert removed"

@@ -2,10 +2,15 @@ package pageObject;
 
 import common.CommonFunctions;
 import common.Hooks;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,5 +82,53 @@ public class PropertyAlertPage {
                 Assert.assertEquals(expectedRecord.get("Type"), System.getProperty("Property type" + Thread.currentThread().getName()).toLowerCase());
             }
         }
+    }
+
+    public void funcSelectData() throws Exception {
+        List<Map<String, String>> gridViewData;
+
+        gridViewData = funcGetAllDataOfGridView();
+
+        for (int i = 0; i < 1; i++) {
+            Map<String, String> expectedRecord = gridViewData.stream().toList().get(i);
+
+            System.setProperty("Alert name" + Thread.currentThread().getName(), expectedRecord.get("Name"));
+
+            System.out.println("The selected data to be deleted: " + expectedRecord.get("Name"));
+
+        }
+    }
+
+    public void funcConfirmDeleteAlert() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            // Chờ alert xuất hiện
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+
+            String alertText = alert.getText();
+            System.out.println("Alert text: " + alertText);
+
+            // Click OK
+            alert.accept();
+
+            System.out.println("✅ Đã click OK trên Delete alert popup");
+
+        } catch (TimeoutException e) {
+            System.out.println("Không tìm thấy alert trong thời gian chờ");
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Lỗi khi xử lý alert: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void funcDeletePropertyAlert() throws Exception {
+
+        String strItemDeleted = System.getProperty("Alert name" + Thread.currentThread().getName());
+        By elePropertyAlertDeleted = By.xpath("//*[text()='" + strItemDeleted + "']/following-sibling::td[@class='text-end']//form/button[text()='Delete']");
+
+        CommonFunctions.funcClickElement(driver, driver.findElement(elePropertyAlertDeleted), intTIMEOUT);
+        funcConfirmDeleteAlert();
     }
 }
