@@ -30,14 +30,6 @@ public class Hooks {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
-//        Map<String, Object> prefs = new HashMap<>();
-//        prefs.put("credentials_enable_service", false);
-//        prefs.put("profile.password_manager_enabled", false);
-//        prefs.put("profile.password_manager_leak_detection", false);  // Ngăn popup "Change your password"
-//        prefs.put("autofill.address_enabled", false);
-//        prefs.put("autofill.payment_enabled", false);
-//
-//        options.setExperimentalOption("prefs", prefs);
     }
 
     @After

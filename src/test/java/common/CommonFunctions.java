@@ -84,7 +84,7 @@ public class CommonFunctions {
     }
 
     public void inputFieldWithLabel(String label, String text, int index) {
-        if (text.contains("random")) {
+        if (text.equals("randomEmail")) {
             if (System.getProperty("randomEmail") == null) {
                 text = faker.name().nameWithMiddle().replaceAll(" ", "") + "@oivan.com";
                 System.setProperty("randomEmail", text);
@@ -93,10 +93,16 @@ public class CommonFunctions {
             }
         }
 
+        if (text.equals("randomAlertName")){
+            text = "House in " + faker.country().name();
+        }
+
         By lab = By.xpath(".//*[contains(text(),'" + label + "')]/following-sibling::input");
         WebElement ele = driver.findElements(lab).get(index);
         ele.clear();
         ele.sendKeys(text);
+
+        System.setProperty(label + Thread.currentThread().getName(), text);
     }
 
     public void funcClickOnElementByValue(String strText, int index) throws InterruptedException {

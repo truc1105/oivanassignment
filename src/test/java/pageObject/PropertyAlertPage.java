@@ -4,6 +4,7 @@ import common.CommonFunctions;
 import common.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +55,27 @@ public class PropertyAlertPage {
             }
         } catch (Exception e) {
             throw new Exception(e);
+        }
+    }
+
+    public void funcVerifyMyNewPropertyAlert() throws Exception {
+        List<Map<String, String>> gridViewData;
+
+        gridViewData = funcGetAllDataOfGridView();
+
+        for (int i = 0; i < gridViewData.size(); i++) {
+            Map<String, String> expectedRecord = gridViewData.stream().toList().get(i);
+
+            String strMinPrice = System.getProperty("Min price" + Thread.currentThread().getName());
+            String strMaxPrice = System.getProperty("Max price" + Thread.currentThread().getName());
+            String strPriceRangeExpected = "$" + strMinPrice + " – " +"$" + strMaxPrice;
+
+            if (expectedRecord.get("Name").equals(System.getProperty("Alert name" + Thread.currentThread().getName()))){
+                Assert.assertEquals(expectedRecord.get("City"), System.getProperty("City" + Thread.currentThread().getName()));
+                Assert.assertEquals(expectedRecord.get("Price range").replace(",",""), strPriceRangeExpected);
+                Assert.assertEquals(expectedRecord.get("Bedrooms").replace("+",""), System.getProperty("Minimum bedrooms" + Thread.currentThread().getName()));
+                Assert.assertEquals(expectedRecord.get("Type"), System.getProperty("Property type" + Thread.currentThread().getName()).toLowerCase());
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ public class PropertyAlertSteps {
         String message = "I input " + strItem + " into the field ";
         try {
             commonFunctions.funcSelectCustomDropdown(strItem, strLabel);
+            System.setProperty(strLabel + Thread.currentThread().getName(), strItem);
+
             System.out.println(message + " ==> PASSED");
 
         } catch (AssertionError | Exception e) {
@@ -22,10 +24,10 @@ public class PropertyAlertSteps {
     }
 
     @When("I verify my new property alert is showing correctly")
-    public void iVerify(String strItem, String strLabel) {
+    public void iVerifyMyNewPropertyAlertShowingCorrectly() {
         String message = "I verify my new property alert is showing correctly";
         try {
-            propertyAlertPage.funcGetAllDataOfGridView();
+            propertyAlertPage.funcVerifyMyNewPropertyAlert();
             System.out.println(message + " ==> PASSED");
 
         } catch (AssertionError | Exception e) {
